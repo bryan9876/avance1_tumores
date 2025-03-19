@@ -1,0 +1,47 @@
+Configuración de la Prueba en Insomnia
+
+    Abre Insomnia y crea una nueva petición.
+    Selecciona el método POST.
+    Escribe la URL de tu API:
+        Para pruebas locales:
+
+http://127.0.0.1:5000/predict
+
+Si ya lo tienes en PythonAnywhere, usa tu URL personalizada:
+
+        https://tuusuario.pythonanywhere.com/predict
+
+    Ve a la pestaña "Body" y selecciona "Multipart".
+    Añade un campo de tipo "File":
+        En Key, escribe: file
+        En Value, selecciona una imagen de tu PC (preferiblemente una imagen de tumor cerebral).
+    Haz clic en "Send" para enviar la solicitud.
+
+Respuesta esperada
+
+Si todo está correcto, recibirás una respuesta JSON similar a esta:
+
+{
+    "ResNet Prediction": "brain tumor",
+    "AlexNet Prediction": "meningioma",
+    "Model Performance": {
+        "ResNet-50": {"Top-1 Accuracy": "76.2%", "Top-5 Accuracy": "92.9%"},
+        "AlexNet": {"Top-1 Accuracy": "56.5%", "Top-5 Accuracy": "79.1%"}
+    }
+}
+
+Si hay un error, revisa que:
+
+    El servidor esté corriendo (python app.py).
+    La URL sea correcta.
+    El archivo se esté enviando correctamente.
+
+Insomnia vs. Prueba en Terminal
+
+Si prefieres probarlo con cURL, usa:
+
+curl -X POST -F "file=@ruta/a/imagen.jpg" http://127.0.0.1:5000/predict
+curl -X POST -F "file=@/home/jony/Tumor.jpg" http://127.0.0.1:5000/predict
+
+¡Listo! Ahora puedes hacer pruebas en Insomnia y asegurarte de que tu API funciona antes de desplegarla. 🚀
+
